@@ -5,18 +5,26 @@ interface ApologyCardProps {
   title: string;
   icon: string;
   description: string;
+  color?: string;
+  borderColor?: string;
 }
 
-export const ApologyCard = ({ title, icon, description }: ApologyCardProps) => {
+export const ApologyCard = ({ 
+  title, 
+  icon, 
+  description, 
+  color = "from-purple-50 to-pink-50", 
+  borderColor = "border-purple-200" 
+}: ApologyCardProps) => {
   return (
-    <Card className="hover:shadow-md transition-shadow duration-300 bg-white border border-purple-100">
+    <Card className={`hover:shadow-lg transition-all duration-300 bg-gradient-to-br ${color} border-2 ${borderColor} hover:scale-105 transform`}>
       <CardHeader className="pb-2">
-        <CardTitle className="flex items-center text-lg text-purple-700">
-          <span className="text-2xl mr-2">{icon}</span> {title}
+        <CardTitle className="flex items-center text-xl text-purple-800">
+          <span className="text-3xl mr-3">{icon}</span> {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-600">{description}</p>
+        <p className="text-gray-700">{description}</p>
       </CardContent>
     </Card>
   );
