@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { ApologyCard } from "@/components/ApologyCard";
-import { HeartIcon, GiftIcon, HomeIcon, CalendarIcon } from "lucide-react";
+import { HeartIcon, ClockIcon, BriefcaseIcon, CalendarIcon } from "lucide-react";
 
 const Index = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -19,7 +19,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 p-4">
       {showConfetti && (
         <div className="fixed inset-0 z-50 pointer-events-none">
-          {Array.from({ length: 50 }).map((_, i) => (
+          {Array.from({ length: 100 }).map((_, i) => (
             <div 
               key={i}
               className="absolute animate-fall"
@@ -28,10 +28,11 @@ const Index = () => {
                 top: "-5%",
                 animation: `fall ${Math.random() * 3 + 2}s linear forwards`,
                 animationDelay: `${Math.random() * 3}s`,
-                backgroundColor: ["#FFD700", "#FF6347", "#9370DB", "#3CB371", "#FF69B4"][Math.floor(Math.random() * 5)],
+                backgroundColor: ["#FFD700", "#FF6347", "#9370DB", "#3CB371", "#FF69B4", "#4169E1"][Math.floor(Math.random() * 6)],
                 width: `${Math.random() * 10 + 5}px`,
                 height: `${Math.random() * 10 + 5}px`,
-                borderRadius: "50%"
+                borderRadius: Math.random() > 0.5 ? "50%" : "0%",
+                transform: `rotate(${Math.random() * 360}deg)`
               }}
             />
           ))}
@@ -46,22 +47,25 @@ const Index = () => {
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-100 rounded-full translate-x-1/2 translate-y-1/2 blur-xl opacity-40" />
         
         <h1 className="text-3xl font-bold text-purple-800 mb-6 relative">
-          Папа, я хочу <span className="text-pink-600">извиниться</span>
+          Папа, я хочу <span className="text-pink-600 animate-pulse">извиниться</span>
         </h1>
         
         {!showMessage ? (
           <>
             <div className="text-center mb-6">
-              <CalendarIcon className="mx-auto h-16 w-16 text-purple-600 mb-4 opacity-90" />
+              <div className="relative mx-auto h-24 w-24 mb-4">
+                <ClockIcon className="absolute h-24 w-24 text-purple-300 animate-ping opacity-30" />
+                <ClockIcon className="relative h-24 w-24 text-purple-600 opacity-90" />
+              </div>
               <p className="text-gray-700 font-medium mb-3 text-lg">
-                Я знаю, что совершил ошибку, пропустив учебу без уважительной причины.
+                Я знаю, что совершил серьезную ошибку, не придя вовремя на работу.
               </p>
               <p className="text-gray-600 mb-6">
                 Пожалуйста, открой моё искреннее извинение.
               </p>
             </div>
             <Button 
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all px-6 py-6 rounded-xl shadow-md hover:shadow-lg text-lg"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all px-6 py-6 rounded-xl shadow-md hover:shadow-lg text-lg animate-pulse"
               onClick={handleOpenMessage}
             >
               Открыть извинение ❤️
@@ -69,15 +73,15 @@ const Index = () => {
           </>
         ) : (
           <div className="animate-fade-in">
-            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
+            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100 shadow-inner">
               <p className="text-gray-700 mb-4 text-lg font-medium">
-                Папа, я искренне сожалею о том, что прогулял учебу без твоего разрешения и подвёл тебя.
+                Папа, я искренне сожалею о том, что не пришел вовремя на работу и подвёл тебя и коллектив.
               </p>
               <p className="text-gray-700 mb-4">
-                Я понимаю, что моё поведение было безответственным, и что образование — это важная часть моего будущего. Обещаю, что такое больше не повторится.
+                Я понимаю, что моя непунктуальность создала проблемы и разочаровала тебя. Это было крайне безответственно с моей стороны, и я полностью осознаю свою вину.
               </p>
               <p className="text-purple-700 font-medium">
-                Ты самый лучший папа, и я очень тебя люблю! Спасибо за твою заботу и понимание.
+                Ты самый лучший папа, и я очень тебя люблю! Спасибо за твоё терпение и понимание. Обещаю исправиться.
               </p>
             </div>
             <div className="flex justify-center gap-4 mb-8">
@@ -85,10 +89,10 @@ const Index = () => {
                 <HeartIcon className="text-red-500 h-10 w-10 drop-shadow-md" />
               </div>
               <div className="animate-pulse">
-                <GiftIcon className="text-yellow-500 h-10 w-10 drop-shadow-md" />
+                <BriefcaseIcon className="text-blue-500 h-10 w-10 drop-shadow-md" />
               </div>
               <div className="animate-bounce-slow">
-                <HomeIcon className="text-blue-500 h-10 w-10 drop-shadow-md" />
+                <ClockIcon className="text-yellow-500 h-10 w-10 drop-shadow-md" />
               </div>
             </div>
             <Button 
@@ -106,21 +110,21 @@ const Index = () => {
         <ApologyCard 
           title="Я осознал свою ошибку" 
           icon="😔" 
-          description="Прогул занятий был безответственным поступком. Я понимаю, почему ты расстроился и разочаровался."
+          description="Опоздание на работу было безответственным поступком. Я понимаю, почему ты расстроился, и как это повлияло на рабочий процесс."
           color="from-red-50 to-orange-50"
           borderColor="border-red-200"
         />
         <ApologyCard 
           title="Моё обещание" 
-          icon="🤝" 
-          description="Клянусь, что больше не буду пропускать занятия без уважительной причины и буду серьёзнее относиться к учёбе."
+          icon="⏰" 
+          description="Клянусь, что впредь буду приходить на работу вовремя и серьёзнее относиться к своим обязанностям и пунктуальности."
           color="from-blue-50 to-purple-50"
           borderColor="border-blue-200"
         />
         <ApologyCard 
           title="Благодарность" 
           icon="🙏" 
-          description="Спасибо за твоё терпение и любовь. Я ценю твои уроки и заботу о моём будущем."
+          description="Спасибо за твоё терпение и доверие. Я ценю возможность работать с тобой и не хочу подводить тебя снова."
           color="from-green-50 to-teal-50"
           borderColor="border-green-200"
         />
